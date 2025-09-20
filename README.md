@@ -2,45 +2,45 @@
 
 Mini Data Warehouse project.
 
-# Setup
+## Setup
 
-## Virtual Environment (VENV)
+### Virtual Environment (VENV)
 
 To create a venv, open the terminal and navigate to the project folder, then type:
 
-```
+```BASH
 python3 -m venv .venv
 ```
 
 To **activate** the virtual environment, type:
 
-```
+```BASH
 source .venv/bin/activate
 ```
 
 And then install packages with pip3.
 
-```
+```BASH
 pip3 install -r requirements.txt
 ```
 
-## Django
+### Django
 
-### New project
+#### New project
 
-```
+```BASH
 django-admin startproject backend .
 ```
 
-# TroubleShooting
+## TroubleShooting
 
-## Setup
+### At Setup
 
 > Error: pg_config executable not found.
 
 WHen this happens you must install `PostgreSQL` from the web. If your macOS does not support it, you must install binaries from [PostgreSQL website](https://www.enterprisedb.com/download-postgresql-binaries) and run the following command lines under download folder:
 
-```
+```BASH
 unzip postgresql-14.19-1-osx-binaries.zip -d ~/pgsql
 
 export PATH="$HOME/pgsql/pgsql/bin:$PATH"
