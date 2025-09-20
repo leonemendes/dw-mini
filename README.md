@@ -18,13 +18,19 @@ To **activate** the virtual environment, type:
 source .venv/bin/activate
 ```
 
-And then install packages with
+And then install packages with pip3.
 
 ```
 pip3 install -r requirements.txt
 ```
 
 ## Django
+
+### New project
+
+```
+django-admin startproject backend .
+```
 
 # TroubleShooting
 
