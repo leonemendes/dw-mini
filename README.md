@@ -32,6 +32,32 @@ pip3 install -r requirements.txt
 django-admin startproject backend .
 ```
 
+### Docker
+
+Docker is an open-source platform that simplifies the process of building, deploying, and running applications using containers.
+Containers are standardized, executable units that package an application's code along with all its dependencies, such as libraries, system tools, and configuration files. This ensures that the application runs consistently across different environments, from a developer's local machine to a production server.
+
+The setup is made through a `docker-compose` file. It builds only infra-strucutre services used by the backend, so our django runs locally through venv and conects with the containers. At this file you can find:
+
+* **postgres**: Relational database used for backend.
+  * Env vars related to user credentials and db name.
+  * Local port access at `5432`.
+  * volume `postgres_data` to ensure data persistency.
+* **redis**: Memory db used as cache and task queue.
+  * Local port access at `6379`.
+  * Used by Django as cache, Celery or even rate limiting.
+* **clickhouse**: Analytics db optimized for large scale data reading.
+  * Port `8123` (HTTP - can be tested through curl) and `9000`(TCP - for drivers).
+  * Volume `clickhouse_data` for persistency.
+* **minIO**: Object storage (S3 compatible).
+  * Port `9000` (API) and `9001` (WEB console for object handling).
+  * Env vars for credentials.
+  * Volume `minio_data` to store objects.
+
+### .env
+
+The `.env` file store environment variables and configuration settings for the project. This file aligns the env information set at `docker-compose` so the local backend can access the containerized part of the project.
+
 ## TroubleShooting
 
 ### At Setup

@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import environ
+import os
 
 from pathlib import Path
 
@@ -121,3 +123,26 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+##################################
+## -------- Data setup -------- ##
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+# Database
+DATABASES = {
+    "default": env.db("DATABASE_URL")
+}
+
+# Cache
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env("REDIS_URL"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        }
+    }
+}
