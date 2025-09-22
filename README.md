@@ -40,6 +40,19 @@ An app is a self-sufficient submodule of the project.
 python manage.py startapp core
 ```
 
+#### Migrations
+
+Django migrations are a system for propagating changes made to your models (e.g., adding a field, deleting a model) into your database schema.
+
+Two commands must be called: one to inspect and compare migrations files. It generates a new migration file containing declarative instructions on how to modify the database and reflect model changes; and one to aplly them to the database.
+
+```BASH
+python manage.py makemigrations core
+python manage.py migrate
+```
+
+Django keeps track of which migrations have been applied in a special table called `django_migrations` within your database.
+
 ### Docker
 
 Docker is an open-source platform that simplifies the process of building, deploying, and running applications using containers.
