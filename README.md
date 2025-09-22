@@ -32,6 +32,14 @@ pip3 install -r requirements.txt
 django-admin startproject backend .
 ```
 
+#### New app
+
+An app is a self-sufficient submodule of the project.
+
+```BASH
+python manage.py startapp core
+```
+
 ### Docker
 
 Docker is an open-source platform that simplifies the process of building, deploying, and running applications using containers.
