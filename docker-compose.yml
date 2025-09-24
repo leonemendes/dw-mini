@@ -27,7 +27,7 @@ services:
     restart: always
     ports:
       - "8123:8123" # HTTP interface
-      - "9000:9000" # TCP interface
+      - "9009:9009" # TCP interface
     volumes:
       - clickhouse_data:/var/lib/clickhouse
 

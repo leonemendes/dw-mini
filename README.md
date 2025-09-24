@@ -81,6 +81,14 @@ To run docker deatached (in background, not blocking terminal) open Docker Daemo
 docker-compose up -d
 ```
 
+You can run an image separately by adding the image name at the very end of this same command.
+
+To fetch containers status you can call
+
+```
+docker ps
+```
+
 ### .env
 
 The `.env` file store environment variables and configuration settings for the project. This file aligns the env information set at `docker-compose` so the local backend can access the containerized part of the project.
@@ -91,7 +99,7 @@ The `.env` file store environment variables and configuration settings for the p
 
 > Error: pg_config executable not found.
 
-WHen this happens you must install `PostgreSQL` from the web. If your macOS does not support it, you must install binaries from [PostgreSQL website](https://www.enterprisedb.com/download-postgresql-binaries) and run the following command lines under download folder:
+If this happens, probably you must install `PostgreSQL` from the web. If your macOS does not support it, you must install binaries from [PostgreSQL website](https://www.enterprisedb.com/download-postgresql-binaries) and run the following command lines under download folder:
 
 ```BASH
 unzip postgresql-14.19-1-osx-binaries.zip -d ~/pgsql
