@@ -75,6 +75,12 @@ The setup is made through a `docker-compose` file. It builds only infra-strucutr
   * Env vars for credentials.
   * Volume `minio_data` to store objects.
 
+To run docker deatached (in background, not blocking terminal) open Docker Daemon and run on terminal:
+
+```
+docker-compose up -d
+```
+
 ### .env
 
 The `.env` file store environment variables and configuration settings for the project. This file aligns the env information set at `docker-compose` so the local backend can access the containerized part of the project.
