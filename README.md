@@ -65,6 +65,12 @@ python manage.py migrate
 
 Django keeps track of which migrations have been applied in a special table called `django_migrations` within your database.
 
+#### Run server
+
+```BASH
+python manage.py runserver
+```
+
 ### Docker
 
 Docker is an open-source platform that simplifies the process of building, deploying, and running applications using containers.
