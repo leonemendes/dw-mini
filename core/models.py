@@ -1,9 +1,12 @@
 from django.db import models
+from django.utils import timezone
 
-class UserEvent(models.Model):
-    event_name = models.CharField(max_length=100)
+class Event(models.Model):
+    name = models.CharField(max_length=255)
     user_id = models.IntegerField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=timezone.now)
+    properties = models.JSONField(default=dict)
 
     def __str__(self):
-        return f"{self.event_name} (user {self.user_id})"
+        return f"{self.name} by {self.user_id} at {self.timestamp}"
+

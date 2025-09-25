@@ -37,7 +37,19 @@ django-admin startproject backend .
 An app is a self-sufficient submodule of the project.
 
 ```BASH
-python manage.py startapp core
+python manage.py startapp app-name
+```
+
+#### Models
+
+Models are source of information about your data. Django's ORM (Object-Relational-Mapper) allows interaction with the database using Python objects instead of raw SQL queries.
+
+#### Tests
+
+Django extends `unittest` framework to test the API.
+
+```BASH
+python manage.py test app-name
 ```
 
 #### Migrations
@@ -77,7 +89,7 @@ The setup is made through a `docker-compose` file. It builds only infra-strucutr
 
 To run docker deatached (in background, not blocking terminal) open Docker Daemon and run on terminal:
 
-```
+```BASH
 docker-compose up -d
 ```
 
@@ -85,7 +97,7 @@ You can run an image separately by adding the image name at the very end of this
 
 To fetch containers status you can call
 
-```
+```BASH
 docker ps
 ```
 
