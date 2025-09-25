@@ -59,7 +59,7 @@ Django migrations are a system for propagating changes made to your models (e.g.
 Two commands must be called: one to inspect and compare migrations files. It generates a new migration file containing declarative instructions on how to modify the database and reflect model changes; and one to aplly them to the database.
 
 ```BASH
-python manage.py makemigrations core
+python manage.py makemigrations app-name
 python manage.py migrate
 ```
 
