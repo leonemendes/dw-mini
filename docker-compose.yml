@@ -1,48 +1,85 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  postgres:
-    image: postgres:14
-    container_name: dw_postgres
-    restart: always
+  # Django application with PyArrow
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+      - clickhouse
     environment:
-      POSTGRES_USER: backend
-      POSTGRES_PASSWORD: backend
-      POSTGRES_DB: backend_db
+      - DEBUG=1
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/dw_mini
+      - REDIS_URL=redis://redis:6379/0
+      - CLICKHOUSE_HOST=clickhouse
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+
+  # Celery worker
+  celery:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - redis
+      - clickhouse
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/dw_mini
+      - REDIS_URL=redis://redis:6379/0
+      - CLICKHOUSE_HOST=clickhouse
+    command: celery -A backend worker --loglevel=info
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=dw_mini
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
+  # Redis for caching and task queue
   redis:
-    image: redis:7
-    container_name: dw_redis
-    restart: always
+    image: redis:7-alpine
     ports:
       - "6379:6379"
 
+  # ClickHouse for analytics
   clickhouse:
-    image: yandex/clickhouse-server:21.8
-    container_name: dw_clickhouse
-    restart: always
-    ports:
-      - "8123:8123" # HTTP interface
-      - "9009:9009" # TCP interface
+    image: clickhouse/clickhouse-server:latest
     volumes:
       - clickhouse_data:/var/lib/clickhouse
-
-  minio:
-    image: minio/minio
-    container_name: dw_minio
-    command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: minio123
     ports:
-      - "9000:9000" # API
-      - "9001:9001" # Console web
+      - "8123:8123"
+      - "9000:9000"
+    environment:
+      - CLICKHOUSE_DB=analytics
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+
+  # MinIO for object storage
+  minio:
+    image: minio/minio:latest
     volumes:
       - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
 
 volumes:
   postgres_data:
