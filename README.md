@@ -99,6 +99,8 @@ To run docker deatached (in background, not blocking terminal) open Docker Daemo
 docker-compose up -d
 ```
 
+If there is something to build inside your `docker-compose` adds `--build` before `-d`.
+
 You can run an image separately by adding the image name at the very end of this same command.
 
 To fetch containers status you can call
