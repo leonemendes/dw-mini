@@ -115,7 +115,9 @@ The `.env` file store environment variables and configuration settings for the p
 
 ## TroubleShooting
 
-### At Setup
+### At Requirements.txt
+
+#### PostgreSQL Install
 
 > Error: pg_config executable not found.
 
@@ -128,3 +130,15 @@ export PATH="$HOME/pgsql/pgsql/bin:$PATH"
 ```
 
 and then try to install requirements again at the same Terminal.
+
+#### PyArrow Install
+
+Can't install PyArrow on MacOS 10.14.6 as it does not compile with CMake working version and there is no way to download binaries for it through `--only-binary` command.
+
+The solution is to find an online compatible version for your MacOs through [PyPI][https://pypi.org/project/pyarrow/14.0.0/#files] navigation through distributions and searching for your MacOs version.
+
+If the downloaded version does not correspond to your python, just rename it to your python version and install it. In my case, for my MacOS 10.14.6 I only found the PyArrow `14.0.0` and for Python `3.12`, so I renamed it and ran:
+
+```BASH
+pip3 install ./pyarrow-14.0.0-cp313-cp313-macosx_10_14_x86_64.whl --force-reinstall --no-deps
+```

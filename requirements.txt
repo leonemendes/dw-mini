@@ -19,7 +19,7 @@ boto3>=1.34
 # Data processing
 pandas>=2.2
 sqlalchemy>=2.0
-pyarrow>=12.0.0
+pyarrow>=14.0.0
 
 # Dev & Tests
 pytest>=8.0
