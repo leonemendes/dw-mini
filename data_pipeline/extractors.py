@@ -17,13 +17,16 @@ def extract_to_arrow(source_config: Dict[str, Any]) -> pa.Table:
     Extract data from PostgreSQL source and convert to Apache Arrow format.
     
     Args:
+    ---
         source_config: Dictionary containing connection parameters
                       (host, database, user, password, table_name, query)
     
     Returns:
+    ---
         pa.Table: Arrow table with extracted data
         
     Raises:
+    ---
         psycopg2.Error: Database connection or query errors
         ValueError: Invalid source configuration
     """
@@ -81,10 +84,12 @@ def get_table_schema(source_config: Dict[str, Any], table_name: str) -> Dict[str
     Get schema information for a specific table.
     
     Args:
+    ---
         source_config: Database connection parameters
         table_name: Name of the table to analyze
         
     Returns:
+    ---
         Dict mapping column names to their data types
     """
     connection = None
@@ -130,9 +135,11 @@ def list_tables(source_config: Dict[str, Any]) -> list:
     List all tables available in the database.
     
     Args:
+    ---
         source_config: Database connection parameters
         
     Returns:
+    ---
         List of table names
     """
     connection = None
