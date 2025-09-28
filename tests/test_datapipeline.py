@@ -14,7 +14,7 @@ def test_basic_pipeline():
     source_config = {
         'host': 'localhost',
         'port': 5432,
-        'database': 'dw_mini',  # Your database name
+        'database': 'backend_db',  # Your database name
         'user': 'postgres',
         'password': 'postgres',
         'query': 'SELECT 1 as id, \'test\' as name'  # Simple test query
