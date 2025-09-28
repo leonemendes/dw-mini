@@ -52,6 +52,23 @@ Django extends `unittest` framework to test the API.
 python manage.py test app-name
 ```
 
+If some specific settings are desired, to run offline for example, you should call  `--setings` argument.
+
+```BASH
+# Run all
+python manage.py test app-name --settings=backend.test_settings
+
+# Run specific test
+python manage.py test app-name.tests.TestCaseClassName.test_case_function_name --settings=backend.test_settings
+
+# Run with verbose
+python manage.py test app-name --settings=backend.test_settings --verbosity=2
+
+# Coverage report
+coverage run --source='.' manage.py test app-name --settings=backend.test_settings
+coverage report -m
+```
+
 #### Migrations
 
 Django migrations are a system for propagating changes made to your models (e.g., adding a field, deleting a model) into your database schema.
@@ -135,10 +152,10 @@ and then try to install requirements again at the same Terminal.
 
 Can't install PyArrow on MacOS 10.14.6 as it does not compile with CMake working version and there is no way to download binaries for it through `--only-binary` command.
 
-The solution is to find an online compatible version for your MacOs through [PyPI][https://pypi.org/project/pyarrow/14.0.0/#files] navigation through distributions and searching for your MacOs version.
+The solution is to find an online compatible version for your MacOs through [PyPI][https://pypi.org/project/pyarrow/8.0.0/#files] navigation through distributions and searching for your MacOs version.
 
 If the downloaded version does not correspond to your python, just rename it to your python version and install it. In my case, for my MacOS 10.14.6 I only found the PyArrow `14.0.0` and for Python `3.12`, so I renamed it and ran:
 
 ```BASH
-pip3 install ./pyarrow-14.0.0-cp313-cp313-macosx_10_14_x86_64.whl --force-reinstall --no-deps
+pip3 install ./pyarrow-8.0.0-cp39-cp39-macosx_10_13_x86_64.whl --force-reinstall
 ```
