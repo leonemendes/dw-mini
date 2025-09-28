@@ -7,6 +7,7 @@ from core.models import Event
 
 class EventModelTest(TestCase):
     def test_create_event(self):
+        """Test basic event creation"""
         event = Event.objects.create(
             name="test_event",
             user_id=123,
@@ -19,6 +20,7 @@ class EventModelTest(TestCase):
 
 class EventAPITest(APITestCase):
     def test_create_event_via_api(self):
+        """Test API event creation"""
         url = reverse('event-list-create')
         payload = {
             "name": "TEST",
@@ -34,6 +36,7 @@ class EventAPITest(APITestCase):
         self.assertEqual(ev.user_id, 23)
 
     def test_list_events(self):
+        """Test sequential events creation"""
         Event.objects.create(name="TEST", user_id=23, properties={"source": "core_test"})
         Event.objects.create(name="TEST", user_id=23, properties={"source": "core_test"})
         url = reverse('event-list-create')

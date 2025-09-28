@@ -2,7 +2,7 @@ import requests
 
 url = "http://127.0.0.1:8000/api/events/"
 data = {
-    "name": "TESTs",
+    "name": "TEST",
     "user_id": 23,
     "properties": {
         "source": "python"
